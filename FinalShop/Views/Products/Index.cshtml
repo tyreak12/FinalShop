@@ -1,0 +1,23 @@
+﻿@model IEnumerable<FinalShop.Models.Product>
+
+<h2>Products</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.productName</td>
+                <td>@product.productDescription</td>
+                <td>@product.Price</td>
+            </tr>
+        }
+    </tbody>
+</table>
