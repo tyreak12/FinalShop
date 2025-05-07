@@ -1,0 +1,150 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using FinalShop.Models
+@inject UserManager<ApplicationUser> UserMgr
+@inject SignInManager<ApplicationUser> SignInMgr
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Blossom Boutique</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">FinalShop</a>
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <!-- Left nav -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Home"
+                               asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Products"
+                               asp-action="Index">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Cart"
+                               asp-action="Index">Cart</a>
+                        </li>
+                    </ul>
+
+                    <!-- Right account dropdown -->
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="accountDropdown"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Account
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end"
+                                aria-labelledby="accountDropdown">
+                                @if (!SignInMgr.IsSignedIn(User))
+                                {
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-area="Identity"
+                                           asp-page="/Account/Register">
+                                            Register
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-area="Identity"
+                                           asp-page="/Account/Login">
+                                            Login
+                                        </a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <span class="dropdown-item-text">
+                                            Hello, @User.Identity.Name!
+                                        </span>
+                                    </li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li>
+                                        <a class="dropdown-item"
+                                           asp-area="Identity"
+                                           asp-page="/Account/Manage/Index">
+                                            Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <form class="dropdown-item p-0"
+                                              asp-area="Identity"
+                                              asp-page="/Account/Logout"
+                                              method="post">
+                                            <button type="submit"
+                                                    class="btn btn-link w-100 text-start">
+                                                Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li><hr class="dropdown-divider" /></li>
+                                        <li><h6 class="dropdown-header">Role Management</h6></li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               asp-area=""
+                                               asp-controller="Roles"
+                                               asp-action="Index">
+                                                List Roles
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item"
+                                               asp-area=""
+                                               asp-controller="Roles"
+                                               asp-action="Create">
+                                                Create Role
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-4">
+        @RenderBody()
+    </div>
+
+    <footer class="border-top footer text-muted text-center mt-4">
+        <div class="container">
+            &copy; 2025 - FinalShop
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

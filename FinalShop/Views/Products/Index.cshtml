@@ -1,23 +1,46 @@
 ﻿@model IEnumerable<FinalShop.Models.Product>
+@inject SignInManager<ApplicationUser> SignInMgr
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Products";
+    var accessValue = Context.Request.Query["access"].ToString();
+    int.TryParse(accessValue, out int accessLevel);
+    var currentFilter = ViewData["CurrentFilter"] as string;
+}
+
 
 <h2>Products</h2>
+@if (SignInMgr.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <a asp-action="Create" class="btn btn-success mb-3">Add New Product</a>
+}
+<form asp-action="Index" method="get" class="row g-2 mb-3">
+    <div class="col-auto">
+        <input type="text"
+               name="searchString"
+               value="@currentFilter"
+               class="form-control"
+               placeholder="Search by name…" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a asp-action="Index" class="btn btn-secondary">Reset</a>
+    </div>
+</form>
 
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>Name</th>
-            <th>Description</th>
             <th>Price</th>
+            <th>Quantity</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var product in Model)
+        @foreach (var p in Model)
         {
-            <tr>
-                <td>@product.productName</td>
-                <td>@product.productDescription</td>
-                <td>@product.Price</td>
-            </tr>
+            @await Html.PartialAsync("_ProductListItem", p)
         }
+
     </tbody>
 </table>

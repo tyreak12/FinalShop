@@ -1,0 +1,11 @@
+﻿@model FinalShop.Models.Product
+
+<tr>
+    <td>@Model.productName</td>
+    <td>@Model.Price.ToString("C")</td>
+    <td>@Model.quantity</td>
+    <td>
+        <a asp-action="Details" asp-route-id="@Model.productID">Details</a>
+       
+    </td>
+</tr>

@@ -1,0 +1,31 @@
+﻿@model FinalShop.Models.Product
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<h2>Create Product</h2>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="productName" class="form-label"></label>
+        <input asp-for="productName" class="form-control" />
+        <span asp-validation-for="productName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="productDescription" class="form-label"></label>
+        <textarea asp-for="productDescription" class="form-control"></textarea>
+        <span asp-validation-for="productDescription" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="quantity" class="form-label"></label>
+        <input asp-for="quantity" class="form-control" />
+        <span asp-validation-for="quantity" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

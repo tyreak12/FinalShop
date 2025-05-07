@@ -1,0 +1,11 @@
+﻿@model FinalShop.Models.DeleteRoleViewModel
+@{
+    ViewData["Title"] = "Delete Role";
+}
+<h2>Delete Role</h2>
+<p>Delete the role <strong>@Model.RoleName</strong>?</p>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

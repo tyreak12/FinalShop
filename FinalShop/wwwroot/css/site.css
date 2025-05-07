@@ -1,22 +1,83 @@
+/* Base font sizing */
 html {
-  font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* Flowery color variables */
+:root {
+    --primary-color: #FFD1DC; /* pale pink */
+    --secondary-color: #FFB7C5; /* rose pink */
+    --accent-color: #6B4226; /* rich brown */
+    --text-color: #4B3832; /* dark wood */
+    --nav-bg: rgba(255, 240, 245, 0.85); /* misty rose translucent */
+    --footer-bg: rgba(255, 182, 193, 0.9); /* light pink */
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* Overall background (optional flower image) */
 body {
-  margin-bottom: 60px;
+    background: url('/images/flowers.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-color);
+    margin-bottom: 60px; /* leave room for footer */
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: var(--nav-bg) !important;
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--accent-color) !important;
+}
+
+    .navbar-brand:hover,
+    .nav-link:hover {
+        color: var(--secondary-color) !important;
+    }
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--accent-color);
+    text-shadow: 1px 1px 2px var(--primary-color);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--secondary-color);
+    border-color: var(--accent-color);
+}
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
+    }
+
+/* Focus rings */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem var(--primary-color), 0 0 0 0.25rem var(--secondary-color);
+}
+
+/* Footer (sticky to bottom) */
+footer {
+    background-color: var(--footer-bg);
+    color: var(--accent-color);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
 }

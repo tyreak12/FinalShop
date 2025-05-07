@@ -1,0 +1,47 @@
+﻿@model List<FinalShop.Models.CartItem>
+@{
+    ViewData["Title"] = "Your Cart";
+    decimal total = Model.Sum(ci => ci.price * ci.quantity);
+}
+
+<h2>Your Shopping Cart</h2>
+
+@if (!Model.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.productName</td>
+                    <td>@item.price.ToString("C")</td>
+                    <td>@item.quantity</td>
+                    <td>
+                        <form asp-controller="Cart" asp-action="Remove" method="post" style="display:inline">
+                            <input type="hidden" name="id" value="@item.productID" />
+                            <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+            <tr>
+                <th colspan="3">Total</th>
+                <th>@total.ToString("C")</th>
+                <th></th>
+            </tr>
+    </table>
+}

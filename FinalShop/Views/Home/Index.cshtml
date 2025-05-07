@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Welcome to FinalShop";
+}
+
+<div class="container py-5 text-center">
+    <h1 class="display-4 mb-3">Welcome to FinalShop</h1>
+    <p class="lead mb-4">
+        FinalShop is your one-stop flower boutique—hand-picked blossoms, custom arrangements,
+        and same-day local delivery. We believe every moment deserves a touch of nature’s beauty.
+    </p>
+
+    <div class="d-flex justify-content-center mb-5">
+        <a asp-controller="Products" asp-action="Index" class="btn btn-primary mx-2">
+            Shop Products
+        </a>
+        <a asp-controller="Home" asp-action="About" class="btn btn-outline-secondary mx-2">
+            About Us
+        </a>
+        <a asp-controller="Home" asp-action="Contact" class="btn btn-outline-secondary mx-2">
+            Contact
+        </a>
+    </div>
+
+    <p class="text-muted">
+        Open Monday–Saturday, 9am–6pm.
+        123 Blossom Lane, Springfield, IA
+        <a href="mailto:info@finalshop.com">info@finalshop.com</a> | (555) 123-4567
+    </p>
+</div>

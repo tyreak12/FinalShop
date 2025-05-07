@@ -1,0 +1,20 @@
+﻿@model EditRoleViewModel
+<h2>Edit Role</h2>
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="RoleName">Role Name</label>
+        <input asp-for="RoleName" class="form-control" />
+        <span asp-validation-for="RoleName"></span>
+    </div>
+    <div>
+        <strong>Members:</strong>
+        <ul>
+            @foreach (var u in Model.Users)
+            {
+                <li>@u</li>
+            }
+        </ul>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

@@ -8,10 +8,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FinalShop.Migrations
+namespace FinalShop.Migrations.Identity
 {
-    [DbContext(typeof(BlossomBoutiqueContext))]
-    partial class BlossomBoutiqueContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(IdentityContext))]
+    partial class IdentityContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -97,61 +97,6 @@ namespace FinalShop.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("FinalShop.Models.Product", b =>
-                {
-                    b.Property<int>("productID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("productID"));
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("productDescription")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("productName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("productID");
-
-                    b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            productID = 1,
-                            Price = 29.99m,
-                            productDescription = "A beautiful bouquet of roses.",
-                            productName = "Rose Bouquet",
-                            quantity = 0
-                        },
-                        new
-                        {
-                            productID = 2,
-                            Price = 19.99m,
-                            productDescription = "A stunning arrangement of tulips.",
-                            productName = "Tulip Arrangement",
-                            quantity = 0
-                        },
-                        new
-                        {
-                            productID = 3,
-                            Price = 39.99m,
-                            productDescription = "A lovely orchid plant.",
-                            productName = "Orchid Plant",
-                            quantity = 0
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

@@ -1,0 +1,33 @@
+﻿@model FinalShop.Models.Product
+@inject SignInManager<ApplicationUser> SignInMgr
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+@{
+    Layout = "_Layout";
+}
+
+<h2>Product Details</h2>
+
+<table class="table">
+    <tr><th>Name</th><td>@Model.productName</td></tr>
+    <tr><th>Description</th><td>@Model.productDescription</td></tr>
+    <tr><th>Price</th><td>@Model.Price</td></tr>
+    <tr><th>Quantity</th><td>@Model.quantity</td></tr>
+</table>
+<form asp-controller="Cart" asp-action="Add" method="post" style="display:inline">
+    <input type="hidden" name="id" value="@Model.productID" />
+    <button type="submit" class="btn btn-sm btn-primary ms-2">
+        Add to Cart
+    </button>
+</form>
+@if (SignInMgr.IsSignedIn(User) && User.IsInRole("Admin"))
+{
+    <a asp-action="Edit" asp-route-id="@Model.productID" class="btn btn-primary">Edit</a>
+    <form asp-action="Delete" asp-route-id="@Model.productID" method="post" class="d-inline"
+          onsubmit="return confirm('Delete this product?');">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+}
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
